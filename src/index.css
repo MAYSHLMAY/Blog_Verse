@@ -38,19 +38,20 @@ input, textarea {
 }
 
 button {
-  padding: 0.5rem;
-  background: #007BFF;
-  color: white;
+  padding: 0.5rem 1rem ;
+  /* background: #007BFF; */
+  color: #000;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
+  transition: 0.25s ease-in;
+  /* border-radius: 4px; */
   margin-top: 0.5rem;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #19191a;
+  color:rgb(255, 255, 255);
 }
-
 .blog-post {
   background: white;
   margin: 1rem auto;
@@ -119,6 +120,10 @@ button:hover {
   font-weight: bold;
 }
 
+.btn_container {
+  display: flex;
+  gap: 1em;
+}
 .contentt {
   width: 100%;
   word-break: break-all;

@@ -79,8 +79,11 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         <>
           <h2>{blog.title}</h2>
           <p className='contentt'>{blog.content}</p>
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
+          <div className='btn_container'>
+            <button onClick={handleEdit}>Edit</button>
+            <button onClick={handleDelete}>Delete</button>
+          </div>
+         
         </>
       )}
       <div>
@@ -102,7 +105,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   {blog.comments && blog.comments.length > 0 ? (
     blog.comments.map((comment, index) => (
       <p key={index} className="comment">
-        {comment}
+        {comment}- <p>{currentUser}</p>
       </p>
     ))
   ) : (
