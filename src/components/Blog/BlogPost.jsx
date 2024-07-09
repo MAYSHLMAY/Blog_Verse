@@ -78,7 +78,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       ) : (
         <>
           <h2>{blog.title}</h2>
-          <p>{blog.content}</p>
+          <p className='contentt'>{blog.content}</p>
           <button onClick={handleEdit}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
         </>

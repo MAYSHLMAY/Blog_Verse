@@ -32,7 +32,7 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
       id: blog?.id || uuidv4(),
       title,
       content,
-      likes: 1 || 0,
+      likes: 0,
       comments: blog?.comments || [],
       author: currentUser.username,
     };

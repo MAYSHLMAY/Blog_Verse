@@ -119,6 +119,11 @@ button:hover {
   font-weight: bold;
 }
 
+.contentt {
+  width: 100%;
+  word-break: break-all;
+}
+
 .max input,
 .max textarea {
   padding: 0.5rem;
