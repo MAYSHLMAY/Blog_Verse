@@ -77,7 +77,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   return (
     <div className="blog-post">
       <div className="blog-header">
-      <h3><img src='../public/profile.png' width= '40px'></img> {blog.author}</h3>
+      <h3><img src='../profile.png' width= '40px'></img> {blog.author}</h3>
       <div>
       {currentUser == blog.author ? (
             <>
