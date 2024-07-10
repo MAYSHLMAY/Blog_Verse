@@ -13,9 +13,7 @@ console.log(currentUser)
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <div className="brand">
-        <Link to="/">BlogVerse</Link>
-      </div>
+    
       <div className="nav-links">
         {currentUser ? (
           <>
@@ -25,12 +23,13 @@ const Navbar = () => {
               </div>
             </Link>
             <Link to="/">{currentUser.username}</Link>
-            <Link to="/" onClick={logout}>
+            <Link to="/splash" onClick={logout}>
               Logout
             </Link>
           </>
         ) : (
           <>
+
             <Link to="/signup">Signup</Link>
             <Link to="/login">Login</Link>
           </>

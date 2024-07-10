@@ -5,6 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../components/Common/Sidebar';
 
 
+
 const Home = () => {
   let cc = JSON.parse(localStorage.getItem('blogs'))
 
@@ -38,7 +39,7 @@ const Home = () => {
           ? {
               ...blog,
               likes: blog.likes + 1,
-              likedBy: blog.likedBy ? [...blog.likedBy, currentUser] : [currentUser],
+              likedBy: blog.likedBy ? [...blog.likedBy, currentUser].reverse() : [currentUser],
             }
           : blog
       );
@@ -59,6 +60,8 @@ const Home = () => {
   const filteredBlogs = blogs.filter(blog =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  console.log(filteredBlogs)
 
   return (
     <div className="container home-container ">

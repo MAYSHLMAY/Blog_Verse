@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faBars, faPalette, faCarAlt, faRunning, faUtensils, faMusic, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
+export let filteredBlogs = [];
 const categories = [
   { id: 1, name: 'Art', icon: faPalette },
   { id: 2, name: 'Cars', icon: faCarAlt },
@@ -13,17 +14,25 @@ const categories = [
   { id: 6, name: 'sss', icon: faQuestion },
 ];
 
-
-
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  let cc = JSON.parse(localStorage.getItem('blogs'))
+  let cc = JSON.parse(localStorage.getItem('blogs'));
   const [blogs, setBlogs] = useState(cc ? cc : []);
-  console.log(blogs)
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredBlogs = selectedCategory
+    ? blogs.filter((blog) => blog.category.name === selectedCategory.name)
+    : blogs;
+
+    console.log(filteredBlogs)
 
   return (
     <div>
@@ -37,7 +46,12 @@ const Sidebar = () => {
           </button>
         </div>
         {categories.map((category) => (
-          <a key={category.id} href="#">
+          <a
+            key={category.id}
+            href="#"
+            onClick={() => handleCategoryClick(category)}
+            className={selectedCategory === category ? 'active' : ''}
+          >
             <FontAwesomeIcon icon={category.icon} />
             <span>{category.name}</span>
           </a>

@@ -26,7 +26,9 @@ export const loginUser = (email, password) => {
 
 export const logout = () => {
   localStorage.removeItem('currentUser')
-  window.location.reload();
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
 }
 
 const setCurrentUser = (user) => {

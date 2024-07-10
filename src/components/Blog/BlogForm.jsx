@@ -40,7 +40,7 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
 
     const currentUser = getCurrentUser();
     if (!currentUser) {
-      navigate('/login');
+      navigate('/splash');
       return;
     }
 

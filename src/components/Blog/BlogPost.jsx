@@ -24,7 +24,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         setShowModal(false);
       }
     } else {
-      navigate('/login');
+      navigate('/splash');
     }
   };
 
@@ -109,6 +109,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       ) : (
         <>
           <h2>{blog.title}</h2>
+          <hr />
           <p className="contentt">{blog.content}</p>
         </>
       )}

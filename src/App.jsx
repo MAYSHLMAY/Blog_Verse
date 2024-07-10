@@ -7,21 +7,50 @@ import Blogg from './pages/cblog';
 import Signup from './components/Auth/Signup';
 import Navbar from './components/Common/Navbar';
 import Footer from './components/Common/Footer';
+import Splash from './pages/splash';
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/newblog" element={<Blogg />} />
-
-        </Routes>
-      </div>
-      <Footer />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Navbar />
+            <div className="main-content">
+              <Home />
+            </div>
+            <Footer />
+          </>
+        } />
+        <Route path="/Splash" element={<Splash />} />
+        <Route path="/login" element={
+          <>
+            <Navbar />
+            <div className="main-content">
+              <Login />
+            </div>
+            <Footer />
+          </>
+        } />
+        <Route path="/signup" element={
+          <>
+            <Navbar />
+            <div className="main-content">
+              <Signup />
+            </div>
+            <Footer />
+          </>
+        } />
+        <Route path="/newblog" element={
+          <>
+            <Navbar />
+            <div className="main-content">
+              <Blogg />
+            </div>
+            <Footer />
+          </>
+        } />
+      </Routes>
     </Router>
   );
 };
