@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { getCurrentUser } from "../../utils/authentic";
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faThumbsUp, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 let currentUser = getCurrentUser() ? getCurrentUser().username : null;
 
 const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
@@ -22,6 +23,14 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       navigate('/login');
     }
   };
+
+  function showCommentModal() {
+    document.getElementById("commentModal").style.display = "block";
+  }
+  
+  function hideCommentModal() {
+    document.getElementById("commentModal").style.display = "none";
+  }
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -67,7 +76,23 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
 
   return (
     <div className="blog-post">
-      <h3>Author: {blog.author}</h3>
+      <div className="blog-header">
+      <h3><img src='../public/profile.png' width= '40px'></img> {blog.author}</h3>
+      <div>
+      {currentUser == blog.author ? (
+            <>
+              <div className="btn_container">
+                <button onClick={handleEdit}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faEdit} /></button>
+                <button onClick={handleDelete}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faTrash} /></button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div></div>
+            </>
+          )}
+      </div>
+      </div>
       
       {isEditing ? (
         <>
@@ -97,49 +122,50 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         <>
           <h2>{blog.title}</h2>
           <p className="contentt">{blog.content}</p>
-          {currentUser == blog.author ? (
-            <>
-              <div className="btn_container">
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-              </div>
-            </>
-          ) : (
-            <>
-              <div></div>
-            </>
-          )}
         </>
       )}
       <div>
-        <button onClick={() => likePost(blog.id)}>Like ({blog.likes})</button>
-      </div>
-      <div>
-      <form onSubmit={(e) => {
-          handleCommentSubmit(e);
-          addCommentToLocalStorage(blog.id, comment);
-        }}>
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Add a comment"
-          />
-          <button type="submit">Comment</button>
-        </form>
-      </div>
-      <div className="comments">
-        <label htmlFor="content">Comments:</label>
-        {blog.comments && blog.comments.length > 0 ? (
-          blog.comments.map((comment, index) => (
-            <p key={index} className="comment">
-              <b>{currentUser}</b>: {comment}
-            </p>
-          ))
-        ) : (
-          <p>No comments</p>
-        )}
-      </div>
+  <div className='thumb'>
+    <button onClick={() => likePost(blog.id)}>
+      <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faThumbsUp} />({blog.likes})
+    </button>
+    <button onClick={() => showCommentModal()}>
+      <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faCommentDots} />
+    </button>
+  </div>
+</div>
+
+<div id="commentModal" className="modal">
+  <div className="modal-content">
+    <span className="close-button" onClick={() => hideCommentModal()}>&times;</span>
+    <form onSubmit={(e) => {
+      handleCommentSubmit(e);
+      addCommentToLocalStorage(blog.id, comment);
+      hideCommentModal();
+    }}>
+      <input
+        type="text"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        placeholder="Add a comment"
+      />
+      <button type="submit">Comment</button>
+    </form>
+  </div>
+</div>
+
+<div className="comments">
+  <label htmlFor="content">Comments:</label>
+  {blog.comments && blog.comments.length > 0 ? (
+    blog.comments.map((comment, index) => (
+      <p key={index} className="comment">
+        <b>{currentUser}</b>: {comment}
+      </p>
+    ))
+  ) : (
+    <p>No comments</p>
+  )}
+</div>
     </div>
   );
 };

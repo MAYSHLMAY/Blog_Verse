@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import BlogForm from '../components/Blog/BlogForm';
 import BlogList from '../components/Blog/BlogList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Sidebar from '../components/Common/Sidebar';
 
 
 const Home = () => {
@@ -59,18 +61,19 @@ const Home = () => {
   );
 
   return (
-    <div className="container home-container">
+    <div className="container home-container ">
+    <Sidebar />
+    <div className='serach-ic'>
       <input
-        type="text"
-        placeholder="Search blogs..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-bar"
-      />
-      <BlogForm addBlog={addBlog} />
-      <BlogList blogs={filteredBlogs} likePost={likePost} addComment={addComment} />
-      
-    </div>
+      type="text"
+      placeholder="Search blogs..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="search-bar"
+    /><FontAwesomeIcon icon={faSearch} /></div>
+    <BlogList blogs={filteredBlogs} likePost={likePost} addComment={addComment} />
+    
+  </div>
   );
 };
 

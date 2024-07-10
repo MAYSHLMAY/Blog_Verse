@@ -1,8 +1,17 @@
+:root {
+  --primary-color: #4a90e2;
+  --bg-color: #f4f7fa;
+  --text-color: #333;
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #e6f0ff;
+}
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
+  box-sizing: border-box;
+  background-image: url(./background.jpg);
+  background-attachment: fixed;
 }
 
 nav {
@@ -39,14 +48,14 @@ input, textarea {
 }
 
 button {
-  padding: 0.5rem 1rem ;
-  /* background: #007BFF; */
-  color: #000;
+  padding: 0.5rem;
+  background: #95C0E7;
+  color: white;
   border: none;
   cursor: pointer;
-  transition: 0.25s ease-in;
-  /* border-radius: 4px; */
+  border-radius: 4px;
   margin-top: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 
@@ -56,7 +65,7 @@ button:hover {
   color:rgb(255, 255, 255);
 }
 .blog-post {
-  background: white;
+  background: #D8E6F7;
   margin: 1rem auto;
   padding: 1rem;
   max-width: 600px;
@@ -64,13 +73,12 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.search-bar {
+search-bar {
   display: block;
   width: 300px;
-  margin: 2rem auto;
   padding: 0.5rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .comment {
@@ -86,6 +94,12 @@ button:hover {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+.blog-header{
+  display: flex;
+  justify-content: space-between;
+  
 }
 
 .navbar .brand a {
@@ -130,6 +144,9 @@ button:hover {
 .contentt {
   width: 100%;
   word-break: break-all;
+  white-space: pre-wrap; /* Preserve white space and line breaks */
+  word-wrap: break-word; /* Break lines at word boundaries */
+  overflow-wrap: break-word;
 }
 
 .max input,
@@ -149,7 +166,6 @@ button:hover {
   text-decoration: underline;
 }
 .footer {
-  background: #333;
   color: white;
   padding: 1rem 0;
   margin-top: 8.5em;
@@ -165,6 +181,43 @@ button:hover {
   margin: 0 0.5rem;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main-content {
+  padding-left: 15em;
+}
 .footer a:hover {
   text-decoration: underline;
 }
@@ -197,6 +250,141 @@ button:hover {
   transition: opacity 0.3s;
 }
 
+
+
 .tooltip:hover:before {
   opacity: 1;
+}
+
+.serach-ic{
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+  color: #fff;
+
+}
+
+.serach-ic svg {
+  color: #000;
+    position: relative;
+    top: 1em;
+    left: -2em;
+}
+.thumb{
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--sidebar-bg);
+  overflow-x: hidden;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar.closed {
+  width: 70px;
+}
+
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.toggle-btn:hover {
+  color: var(--primary-color);
+}
+
+.sidebar a {
+  padding: 15px 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background-color: var(--sidebar-hover);
+  color: var(--primary-color);
+}
+
+.sidebar a i,
+.sidebar a svg {
+  min-width: 30px;
+  font-size: 20px;
+}
+
+#main {
+  transition: margin-left 0.3s;
+  padding: 20px;
+  margin-left: 250px;
+}
+
+#main.shifted {
+  margin-left: 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+  }
+
+  .sidebar.open {
+    width: 250px;
+  }
+
+  .sidebar .sidebar-header h3 {
+    display: none;
+  }
+
+  .sidebar.open .sidebar-header h3 {
+    display: block;
+  }
+
+  .sidebar a span {
+    display: none;
+  }
+
+  .sidebar.open a span {
+    display: inline;
+  }
+
+  #main {
+    margin-left: 70px;
+  }
+
+  #main.shifted {
+    margin-left: 250px;
+  }
 }

@@ -18,6 +18,22 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
   const [title, setTitle] = useState(blog?.title || '');
   const [content, setContent] = useState(blog?.content || '');
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const categories = [
+    { id: 1, name: 'Art' },
+    { id: 2, name: 'Cars' },
+    { id: 3, name: 'Fitness' },
+    { id: 4, name: 'Food' },
+    { id: 5, name: 'Music' },
+    { id: 6, name: 'sss' },
+  ];
+
+  const handleCategoryChange = (event) => {
+    const selectedCategoryId = event.target.value;
+    const selectedCategory = categories.find((category) => category.id.toString() === selectedCategoryId);
+    setSelectedCategory(selectedCategory);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +51,7 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
       likes: 0,
       comments: blog?.comments || [],
       author: currentUser.username,
+      category: selectedCategory, // Store the selected category object
     };
 
     if (blog) {
@@ -45,7 +62,9 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
     }
     setTitle('');
     setContent('');
+    setSelectedCategory('');
     console.log(getLS());
+    navigate('/');
   };
 
   return (
@@ -58,13 +77,29 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
         placeholder="Title"
         required
       />
+
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
         required
       ></textarea>
-      <button type="submit">{blog ? 'Update' : 'Post'}</button>
+
+      <div>
+        <label htmlFor="category">Select a category:</label>
+        <select id="category" value={selectedCategory?.id || ''} onChange={handleCategoryChange}>
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button type="submit" disabled={!selectedCategory}>
+        {blog ? 'Update' : 'Post'}
+      </button>
     </form>
   );
 };

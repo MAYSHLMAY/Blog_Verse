@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="nav-links">
         {currentUser ? (
           <>
-            <Link to="/">
+            <Link to="/newblog">
               <div className="tooltip" title="Create a new post">
                 <FontAwesomeIcon icon={faPlus} style={{ fontSize: "24px" }} />
               </div>
