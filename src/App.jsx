@@ -6,6 +6,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Navbar from './components/Common/Navbar';
 import Footer from './components/Common/Footer';
+import Sample from './components/Auth/Sample';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Sample" element={<Sample />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>

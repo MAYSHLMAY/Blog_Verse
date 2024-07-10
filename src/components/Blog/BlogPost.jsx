@@ -48,7 +48,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
 
   return (
     <div className="blog-post">
-      <h3>User: {blog.author}</h3>
+      <h3>Author: {blog.author}</h3>
       
       {isEditing ? (
         <>

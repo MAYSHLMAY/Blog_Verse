@@ -35,8 +35,6 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
       likes: 0,
       comments: blog?.comments || [],
       author: currentUser.username,
-      createdAt: null,
-      updatedAt: null
     };
 
     if (blog) {

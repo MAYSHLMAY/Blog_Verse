@@ -33,6 +33,7 @@ form {
 input, textarea {
   margin: 0.5rem 0;
   padding: 0.5rem;
+  resize: vertical;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -47,6 +48,8 @@ button {
   /* border-radius: 4px; */
   margin-top: 0.5rem;
 }
+
+
 
 button:hover {
   background: #19191a;
@@ -170,4 +173,30 @@ button:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip:before {
+  content: attr(title);
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover:before {
+  opacity: 1;
 }
