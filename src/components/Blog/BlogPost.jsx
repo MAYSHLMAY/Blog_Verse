@@ -2,7 +2,8 @@ import { useState } from "react";
 import { getCurrentUser } from "../../utils/authentic";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faThumbsUp, faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faThumbsUp, faCommentDots, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+
 let currentUser = getCurrentUser() ? getCurrentUser().username : null;
 
 const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
@@ -10,6 +11,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(blog.title);
   const [editContent, setEditContent] = useState(blog.content);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleCommentSubmit = (e) => {
@@ -17,20 +19,14 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
     if (currentUser) {
       if (comment.trim()) {
         addComment(blog.id, comment);
+        addCommentToLocalStorage(blog.id, comment);
         setComment("");
+        setShowModal(false);
       }
     } else {
       navigate('/login');
     }
   };
-
-  function showCommentModal() {
-    document.getElementById("commentModal").style.display = "block";
-  }
-  
-  function hideCommentModal() {
-    document.getElementById("commentModal").style.display = "none";
-  }
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -69,36 +65,29 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       }
       blogData[currBlogIndex].comments.push([currentUser, commentText]);
       localStorage.setItem("blogs", JSON.stringify(blogData));
+      window.location.reload()
     }
   };
-
-
 
   return (
     <div className="blog-post">
       <div className="blog-header">
-      <h3><img src='../profile.png' width= '40px'></img> {blog.author}</h3>
-      <div>
-      {currentUser == blog.author ? (
-            <>
-              <div className="btn_container">
-                <button onClick={handleEdit}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faEdit} /></button>
-                <button onClick={handleDelete}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faTrash} /></button>
-              </div>
-            </>
-          ) : (
-            <>
-              <div></div>
-            </>
+        <h3><img src='../profile.png' width= '40px' alt="Profile" /> {blog.author}</h3>
+        <div>
+          {currentUser === blog.author && (
+            <div className="btn_container">
+              <button onClick={handleEdit}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faEdit} /></button>
+              <button onClick={handleDelete}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faTrash} /></button>
+            </div>
           )}
+        </div>
       </div>
-      </div>
-      
+
       {isEditing ? (
         <>
-          <div class="max">
+          <div className="max">
             <div>
-              <label for="title">Title:</label>
+              <label htmlFor="title">Title:</label>
               <input
                 type="text"
                 id="title"
@@ -107,7 +96,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
               />
             </div>
             <div>
-              <label for="content">Content:</label>
+              <label htmlFor="content">Content:</label>
               <textarea
                 id="content"
                 value={editContent}
@@ -115,7 +104,6 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
               ></textarea>
             </div>
           </div>
-
           <button onClick={handleSaveEdit}>Save</button>
         </>
       ) : (
@@ -124,48 +112,73 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
           <p className="contentt">{blog.content}</p>
         </>
       )}
-      <div>
-  <div className='thumb'>
-    <button onClick={() => likePost(blog.id)}>
-      <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faThumbsUp} />({blog.likes})
-    </button>
-    <button onClick={() => showCommentModal()}>
-      <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faCommentDots} />
-    </button>
-  </div>
-</div>
 
-<div id="commentModal" className="modal">
-  <div className="modal-content">
-    <span className="close-button" onClick={() => hideCommentModal()}>&times;</span>
-    <form onSubmit={(e) => {
-      handleCommentSubmit(e);
-      addCommentToLocalStorage(blog.id, comment);
-      hideCommentModal();
-    }}>
-      <input
-        type="text"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        placeholder="Add a comment"
-      />
-      <button type="submit">Comment</button>
-    </form>
-  </div>
-</div>
+      <div className="thumb">
+        <button onClick={() => likePost(blog.id)}>
+          <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faThumbsUp} />({blog.likes})
+        </button>
+        <button onClick={() => setShowModal(true)}>
+          <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faCommentDots} />
+        </button>
+      </div>
 
-<div className="comments">
-  <label htmlFor="content">Comments:</label>
-  {blog.comments && blog.comments.length > 0 ? (
-    blog.comments.map((comment, index) => (
-      <p key={index} className="comment">
-        <b>{currentUser}</b>: {comment}
-      </p>
-    ))
-  ) : (
-    <p>No comments</p>
-  )}
-</div>
+      {showModal && (
+        <div className="modal" style={{ display: 'block' }}>
+          <div className="modal-content">
+            <span className="close-button" onClick={() => setShowModal(false)}>&times;</span>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h5 className="card-title">Leave a comment</h5>
+                <hr />
+                <form onSubmit={handleCommentSubmit}>
+                  <div className="form-group">
+                    <textarea
+                      type="text"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      className="form-control"
+                      placeholder="Add a comment"
+                    />
+                  </div>
+                  <button type="submit" className="btn">Comment</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="comments-section">
+        <h3>Comments</h3>
+        <div id="comments">
+          {blog.comments && blog.comments.length > 0 ? (
+            blog.comments.map((comment, index) => (
+              <div key={index} className="comment">
+                <img
+                  src="./profile.png"
+                  alt="Avatar"
+                />
+                <div className="comment-content">
+                  <p>
+                    <strong>{comment[0]}:</strong> {comment[1]}
+                  </p>
+                  <div className="comment-actions">
+              <button className="edit-comment-btn" onClick={() => editComment(index)}>
+              <FontAwesomeIcon style={{ fontSize: '15px' }} icon={faThumbsUp} /> (1)
+              </button>
+              <button className="delete-comment-btn" onClick={() => deleteComment(index)}>
+              <FontAwesomeIcon style={{ fontSize: '15px' }} icon={faThumbsDown} /> (1)
+
+              </button>
+            </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No comments</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

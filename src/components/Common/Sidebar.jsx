@@ -1,6 +1,7 @@
 // Sidebar.jsx
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import { faBars, faPalette, faCarAlt, faRunning, faUtensils, faMusic, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 const categories = [
@@ -28,7 +29,9 @@ const Sidebar = () => {
     <div>
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <h3>Menu</h3>
+          <h1>
+            <Link to="/">BlogVerse</Link>
+          </h1>
           <button className="toggle-btn" onClick={toggleSidebar}>
             <FontAwesomeIcon icon={faBars} />
           </button>
