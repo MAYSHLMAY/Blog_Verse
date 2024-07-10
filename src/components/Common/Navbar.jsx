@@ -7,6 +7,9 @@ const currentUser = getCurrentUser();
 console.log(currentUser)
 
 
+
+
+
 const Navbar = () => {
   return (
     <nav className="navbar">

@@ -1,64 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Sample() {
   const [name, setName] = useState('');
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Open the IndexedDB connection
-    const request = window.indexedDB.open('myDatabase', 1);
-
-    // Create the object store if it doesn't exist
-    request.onupgradeneeded = function(event) {
-      const db = event.target.result;
-      const objectStore = db.createObjectStore('people', { keyPath: 'id', autoIncrement: true });
-    };
-
-    // Retrieve data when the component mounts
-    retrieveData(request);
+    fetchData();
   }, []);
 
-  const saveData = () => {
-    // Open a transaction and add the data to the object store
-    const request = window.indexedDB.open('myDatabase', 1);
-    request.onsuccess = function(event) {
-      const db = event.target.result;
-      const transaction = db.transaction(['people'], 'readwrite');
-      const objectStore = transaction.objectStore('people');
-      objectStore.add({ name });
-
-      // Handle the success and error cases
-      transaction.oncomplete = function() {
-        console.log('Data saved successfully!');
-        retrieveData(request);
-      };
-
-      transaction.onerror = function() {
-        console.error('Error saving data:', transaction.error);
-      };
-    };
+  const fetchData = () => {
+    axios.get('/api/data')
+      .then(response => setData(response.data))
+      .catch(error => console.error('Error retrieving data:', error));
   };
 
-  const retrieveData = (request) => {
-    request.onsuccess = function(event) {
-      const db = event.target.result;
-      const transaction = db.transaction(['people'], 'readonly');
-      const objectStore = transaction.objectStore('people');
-      const request = objectStore.getAll();
-
-      request.onsuccess = function(event) {
-        setData(event.target.result);
-      };
-
-      request.onerror = function() {
-        console.error('Error retrieving data:', request.error);
-      };
-    };
+  const saveData = () => {
+    axios.post('/api/data', { name })
+      .then(() => {
+        console.log('Data saved successfully!');
+        setName('');
+        fetchData();
+      })
+      .catch(error => console.error('Error saving data:', error));
   };
 
   return (
     <div>
-      <h1>IndexedDB Example</h1>
+      <h1>Server-side Example</h1>
       <div>
         <label htmlFor="name">Name:</label>
         <input

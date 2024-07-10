@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import BlogForm from '../components/Blog/BlogForm';
 import BlogList from '../components/Blog/BlogList';
+import "./blogs.js"
+
 
 const Home = () => {
   let cc = JSON.parse(localStorage.getItem('blogs'))
