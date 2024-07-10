@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getCurrentUser } from "../../utils/authentic";
+import { useNavigate } from 'react-router-dom';
 
 let currentUser = getCurrentUser() ? getCurrentUser().username : null;
 
@@ -8,13 +9,17 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(blog.title);
   const [editContent, setEditContent] = useState(blog.content);
+  const navigate = useNavigate();
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    if (comment.trim()) {
-      addComment(blog.id, comment);
-      console.log(comment, currentUser);
-      setComment("");
+    if (currentUser) {
+      if (comment.trim()) {
+        addComment(blog.id, comment);
+        setComment("");
+      }
+    } else {
+      navigate('/login');
     }
   };
 
@@ -45,6 +50,20 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
     }
     window.location.reload();
   };
+
+  const addCommentToLocalStorage = (blogId, commentText) => {
+    let blogData = JSON.parse(localStorage.getItem("blogs"));
+    let currBlogIndex = blogData.findIndex((blog) => blog.id === blogId);
+    if (currBlogIndex !== -1) {
+      if (!blogData[currBlogIndex].comments) {
+        blogData[currBlogIndex].comments = [];
+      }
+      blogData[currBlogIndex].comments.push([currentUser, commentText]);
+      localStorage.setItem("blogs", JSON.stringify(blogData));
+    }
+  };
+
+
 
   return (
     <div className="blog-post">
@@ -96,7 +115,10 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         <button onClick={() => likePost(blog.id)}>Like ({blog.likes})</button>
       </div>
       <div>
-        <form onSubmit={handleCommentSubmit}>
+      <form onSubmit={(e) => {
+          handleCommentSubmit(e);
+          addCommentToLocalStorage(blog.id, comment);
+        }}>
           <input
             type="text"
             value={comment}
