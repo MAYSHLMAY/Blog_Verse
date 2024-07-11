@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -12,8 +12,6 @@ import { getCurrentUser } from './utils/authentic';
 
 const App = () => {
   const currentUser = getCurrentUser();
-
-  
 
   return (
     <Router>
@@ -31,7 +29,13 @@ const App = () => {
             <Navigate to="/splash" replace />
           )
         } />
-        <Route path="/Splash" element={<Splash />} />
+        <Route path="/Splash" element={
+          currentUser ? (
+            <Navigate to="/" replace />
+          ) : (
+            <Splash />
+          )
+        } />
         <Route path="/login" element={
           currentUser ? (
             <Navigate to="/" replace />
