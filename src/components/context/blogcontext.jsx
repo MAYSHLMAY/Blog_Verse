@@ -15,10 +15,6 @@ const BlogProvider = ({ children }) => {
     ? blogs.filter((blog) => blog.category && blog.category.name === selectedCategory.name)
     : blogs;
 
-  console.log('blogs:', blogs);
-  console.log('selectedCategory:', selectedCategory);
-  console.log('filteredBlogs:', filteredBlogs);
-
   return (
     <BlogContext.Provider value={{ blogs, setBlogs, selectedCategory, setSelectedCategory, filteredBlogs }}>
       {children}

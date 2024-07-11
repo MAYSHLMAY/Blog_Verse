@@ -18,8 +18,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
     e.preventDefault();
     if (currentUser) {
       if (comment) {
-        addComment(blog.id, comment);
-        addCommentToLocalStorage(blog.id, comment);
+        addComment(blog.id, comment, currentUser);
         setComment("");
         setShowModal(false);
       }
@@ -54,19 +53,6 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       localStorage.setItem("blogs", JSON.stringify(blogData));
     }
     window.location.reload();
-  };
-
-  const addCommentToLocalStorage = (blogId, commentText) => {
-    let blogData = JSON.parse(localStorage.getItem("blogs"));
-    let currBlogIndex = blogData.findIndex((blog) => blog.id === blogId);
-    if (currBlogIndex !== -1) {
-      if (!blogData[currBlogIndex].comments) {
-        blogData[currBlogIndex].comments = [];
-      }
-      blogData[currBlogIndex].comments.push([currentUser, commentText]);
-      localStorage.setItem("blogs", JSON.stringify(blogData));
-      window.location.reload()
-    }
   };
 
   return (
@@ -108,13 +94,17 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         </>
       ) : (
         <>
+        <div className="titles">
           <h2>{blog.title}</h2>
+          <h5>{blog.category.name}</h5>
+        </div>
+          
           <hr />
           <p className="contentt">{blog.content}</p>
         </>
       )}
 
-<div className="thumb">
+      <div className="thumb">
         <button onClick={() => likePost(blog.id)}>
           <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faThumbsUp} />({blog.likes})
         </button>
@@ -164,10 +154,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
                     <strong>{comment[0]}:</strong> {comment[1]}
                   </p>
                   <div className="comment-actions">
-              
-
-              
-            </div>
+                  </div>
                 </div>
               </div>
             ))

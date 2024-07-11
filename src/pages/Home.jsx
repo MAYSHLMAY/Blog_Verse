@@ -43,11 +43,11 @@ const Home = () => {
     }
   };
 
-  const addComment = (id, comment) => {
+  const addComment = (id, comment, currUser) => {
     setBlogs(
       blogs.map((blog) =>
         blog.id === id
-          ? { ...blog, comments: [...blog.comments, comment] }
+          ? { ...blog, comments: [...blog.comments, [currUser, comment]] }
           : blog
       )
     );
