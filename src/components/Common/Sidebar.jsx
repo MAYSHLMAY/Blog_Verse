@@ -35,7 +35,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <h1>
           
-            <Link to="/"><FontAwesomeIcon icon={faBolt} /> BlogVerse</Link>
+            <Link to="/"><FontAwesomeIcon icon={faBolt} /> BlogBLAST</Link>
           </h1>
           <button className="toggle-btn" onClick={toggleSidebar}>
             <FontAwesomeIcon icon={faBars} />
