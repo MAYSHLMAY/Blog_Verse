@@ -75,7 +75,7 @@ const Home = () => {
       className="search-bar"
     /><FontAwesomeIcon icon={faSearch} /></div>
     <BlogList blogs={filteredBlogs} likePost={likePost} addComment={addComment} />
-  
+    
   </div>
   );
 };

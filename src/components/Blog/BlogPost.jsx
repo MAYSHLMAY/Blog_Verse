@@ -108,10 +108,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         </>
       ) : (
         <>
-        <div>
           <h2>{blog.title}</h2>
-          <h2>{blog.category}</h2>
-        </div>
           <hr />
           <p className="contentt">{blog.content}</p>
         </>

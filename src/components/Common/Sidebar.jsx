@@ -48,7 +48,7 @@ const Sidebar = () => {
         {categories.map((category) => (
           <a
             key={category.id}
-            href="/"
+            href="#"
             onClick={() => handleCategoryClick(category)}
             className={selectedCategory === category ? 'active' : ''}
           >
