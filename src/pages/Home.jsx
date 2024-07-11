@@ -1,17 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import BlogList from '../components/Blog/BlogList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../components/Common/Sidebar';
-
-
+import { BlogContext } from '../components/context/blogcontext';
 
 const Home = () => {
-  let cc = JSON.parse(localStorage.getItem('blogs'))
-
-  const [blogs, setBlogs] = useState(cc ? cc : []);
+  const { blogs, setBlogs, filteredBlogs } = useContext(BlogContext);
   const [searchTerm, setSearchTerm] = useState('');
-
 
   const addBlog = (newBlog) => {
     setBlogs([newBlog, ...blogs]);
@@ -57,26 +53,25 @@ const Home = () => {
     );
   };
 
-  const filteredBlogs = blogs.filter(blog =>
+  const filteredSearchBlogs = filteredBlogs.filter(blog =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log(filteredBlogs)
-
   return (
     <div className="container home-container ">
-    <Sidebar />
-    <div className='serach-ic'>
-      <input
-      type="text"
-      placeholder="Search blogs..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="search-bar"
-    /><FontAwesomeIcon icon={faSearch} /></div>
-    <BlogList blogs={filteredBlogs} likePost={likePost} addComment={addComment} />
-    
-  </div>
+      <Sidebar />
+      <div className='serach-ic'>
+        <input
+          type="text"
+          placeholder="Search blogs..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
+        <FontAwesomeIcon icon={faSearch} />
+      </div>
+      <BlogList blogs={filteredSearchBlogs} likePost={likePost} addComment={addComment} />
+    </div>
   );
 };
 

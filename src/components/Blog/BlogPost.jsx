@@ -114,7 +114,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
         </>
       )}
 
-      <div className="thumb">
+<div className="thumb">
         <button onClick={() => likePost(blog.id)}>
           <FontAwesomeIcon style={{ fontSize: '25px' }} icon={faThumbsUp} />({blog.likes})
         </button>
@@ -164,13 +164,9 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
                     <strong>{comment[0]}:</strong> {comment[1]}
                   </p>
                   <div className="comment-actions">
-              <button className="edit-comment-btn" onClick={() => editComment(index)}>
-              <FontAwesomeIcon style={{ fontSize: '15px' }} icon={faThumbsUp} /> (1)
-              </button>
-              <button className="delete-comment-btn" onClick={() => deleteComment(index)}>
-              <FontAwesomeIcon style={{ fontSize: '15px' }} icon={faThumbsDown} /> (1)
+              
 
-              </button>
+              
             </div>
                 </div>
               </div>

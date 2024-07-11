@@ -65,6 +65,7 @@ const BlogForm = ({ addBlog, editBlog, blog }) => {
     setSelectedCategory('');
     console.log(getLS());
     navigate('/');
+    window.location.reload()
   };
 
   return (

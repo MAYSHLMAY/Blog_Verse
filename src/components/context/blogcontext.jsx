@@ -1,24 +1,29 @@
-import React, { createContext, useState, useEffect} from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const BlogContext = createContext();
 
-export const BlogProvider = ({ children }) => {
-  const [blogs, setBlogs] = useState([]);
+const BlogProvider = ({ children }) => {
+  const initialBlogs = JSON.parse(localStorage.getItem('blogs')) || [];
+  const [blogs, setBlogs] = useState(initialBlogs);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    // Load blogs from localStorage or initialize an empty array
-    const storedBlogs = JSON.parse(localStorage.getItem('blogs')) || [];
-    setBlogs(storedBlogs);
-  }, []);
+    localStorage.setItem('blogs', JSON.stringify(blogs));
+  }, [blogs]);
 
-  const filteredBlogs2 = selectedCategory
-    ? blogs.filter((blog) => blog.category.name === selectedCategory.name)
+  const filteredBlogs = selectedCategory
+    ? blogs.filter((blog) => blog.category && blog.category.name === selectedCategory.name)
     : blogs;
 
+  console.log('blogs:', blogs);
+  console.log('selectedCategory:', selectedCategory);
+  console.log('filteredBlogs:', filteredBlogs);
+
   return (
-    <BlogContext.Provider value={{ blogs, setBlogs, selectedCategory, setSelectedCategory, filteredBlogs2 }}>
+    <BlogContext.Provider value={{ blogs, setBlogs, selectedCategory, setSelectedCategory, filteredBlogs }}>
       {children}
     </BlogContext.Provider>
   );
 };
+
+export { BlogProvider };

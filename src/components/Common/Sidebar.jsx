@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faBars, faPalette, faCarAlt, faRunning, faUtensils, faMusic, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPalette, faCarAlt, faRunning, faUtensils, faMusic, faQuestion, faHome } from '@fortawesome/free-solid-svg-icons';
+import { BlogContext } from '../context/blogcontext';
 
-export let filteredBlogs = [];
 const categories = [
   { id: 1, name: 'Art', icon: faPalette },
   { id: 2, name: 'Cars', icon: faCarAlt },
@@ -15,23 +15,19 @@ const categories = [
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  let cc = JSON.parse(localStorage.getItem('blogs'));
-  const [blogs, setBlogs] = useState(cc ? cc : []);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { selectedCategory, setSelectedCategory } = useContext(BlogContext);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleHome = () => {
+    window.location.reload()
+  }
+
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
-
-  const filteredBlogs = selectedCategory
-    ? blogs.filter((blog) => blog.category && blog.category.name === selectedCategory.name)
-    : blogs;
-
-  console.log(filteredBlogs);
 
   return (
     <div>
@@ -44,6 +40,12 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
+        <div>
+        <FontAwesomeIcon icon={faHome} />
+        <button  onClick={() => handleHome()}>Home</button>
+        </div>
+      
+          <p>Discover categories</p>
         {categories.map((category) => (
           <Link
             key={category.id}
