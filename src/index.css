@@ -384,9 +384,9 @@ search-bar {
   .sidebar {
     width: 0px;
   }
-  .toggle-btn > * {
+  .sidebar.open .sidebar-header .toggle-btn > * {
     color: #000;
-}
+  }
   .toggle-btn {
     display: block;
     position: fixed;
