@@ -206,19 +206,17 @@ search-bar {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
-  background-color: #fefefe;
+.card.mb-3 {
   margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
 }
 
 .close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    right: -10.5em;
+    top: 0.5em;
 }
 
 .close-button:hover,
@@ -730,10 +728,14 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 .splash-copyright {
   font-size: 0.8rem;
 }
-@media screen and (min-width: 894px){
+@media screen and (min-width: 794px){
   .main-content {
     padding-left: 16em;
-  }}
+  }
+  .serach-ic{
+    padding-left:2em;
+  }
+}
 .main-content {
   padding-left: 5em;
   padding-right: 1rem;

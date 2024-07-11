@@ -120,9 +120,9 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
 
       {showModal && (
         <div className="modal" style={{ display: 'block' }}>
-          <div className="modal-content">
-            <span className="close-button" onClick={() => setShowModal(false)}>&times;</span>
+           
             <div className="card mb-3">
+            <span className="close-button" onClick={() => setShowModal(false)}>&times;</span>
               <div className="card-body">
                 <h5 className="card-title">Leave a comment</h5>
                 <hr />
@@ -140,7 +140,6 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
                 </form>
               </div>
             </div>
-          </div>
         </div>
       )}
 
