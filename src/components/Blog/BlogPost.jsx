@@ -17,7 +17,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (currentUser) {
-      if (comment.trim()) {
+      if (comment) {
         addComment(blog.id, comment);
         addCommentToLocalStorage(blog.id, comment);
         setComment("");
