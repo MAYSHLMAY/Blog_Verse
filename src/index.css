@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/lugrasimo');
+@import url('https://fonts.cdnfonts.com/css/bruno-ace-sc-2');
 :root {
   --primary-color: #4a90e2;
   --bg-color: #f4f7fa;
@@ -5,6 +7,7 @@
   --sidebar-bg: #ffffff;
   --sidebar-hover: #e6f0ff;
 }
+
 
 * {
   transition: 0.5s ease-in;
@@ -52,13 +55,12 @@ input, textarea {
 
 button {
   padding: 0.5rem;
-  background: #95C0E7;
-  color: white;
-  border: none;
+  color: #2d2a2a;
   cursor: pointer;
   border-radius: 4px;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
+
 }
 
 
@@ -89,13 +91,14 @@ search-bar {
 }
 .navbar {
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 1;
+  background: #636a71;
 }
 
 .blog-header{
@@ -272,7 +275,7 @@ search-bar {
   background: #0000008a;
   color: #fff;
   position: sticky;
-  top: 0em;
+  top: 3em;
   margin-top: -0.9em;
 }
 
@@ -345,9 +348,6 @@ search-bar {
   transition: 0.2s;
 }
 
-.toggle-btn:hover {
-  color: var(--primary-color);
-}
 
 .sidebar a {
   padding: 15px 25px;
@@ -383,6 +383,8 @@ search-bar {
 @media screen and (max-width: 768px) {
   .sidebar {
     width: 0px;
+    background-color:  #6D7E8D;
+    color: #fff;
   }
   .sidebar.open .sidebar-header .toggle-btn > * {
     color: #000;
@@ -678,6 +680,14 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 .card__body h4 {
   font-size: 1.5rem;
   text-transform: capitalize;
+  font-family: 'Bruno Ace SC', sans-serif;
+                                                
+                                                
+}
+
+.card__body p {
+  font-family: 'Lugrasimo', sans-serif;
+                                              
 }
 
 .card__footer {
@@ -740,7 +750,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   }
 }
 .main-content {
-  padding-left: 5em;
-  padding-right: 5rem;
-  margin: 5em auto;
+  padding-left: 1em;
+    padding-right: 1rem;
+    margin: 5em auto;
 }
