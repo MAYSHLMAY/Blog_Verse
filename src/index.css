@@ -315,24 +315,24 @@ search-bar {
 
 .sidebar.open {
   width: 250px;
+  
 }
 
 .sidebar.closed {
   width: 70px;
 }
 
-.sidebar-header {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #e0e0e0;
-}
+
 
 .sidebar-header h3 {
   margin: 0;
   font-size: 1.2em;
   color: var(--primary-color);
+}
+
+.sidebar-header h1 a {
+  padding: 1em 2em;
+    font-size: 21px;
 }
 
 .toggle-btn {
@@ -384,6 +384,9 @@ search-bar {
   .sidebar {
     width: 0px;
   }
+  .toggle-btn > * {
+    color: #000;
+}
   .toggle-btn {
     display: block;
     position: fixed;
@@ -738,5 +741,6 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 }
 .main-content {
   padding-left: 5em;
-  padding-right: 1rem;
+  padding-right: 5rem;
+  margin: 5em auto;
 }

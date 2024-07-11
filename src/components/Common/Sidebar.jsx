@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faBars, faPalette, faCarAlt, faRunning, faUtensils, faMusic, faQuestion, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPalette, faBolt, faCarAlt, faRunning, faUtensils, faMusic, faQuestion, faHome } from '@fortawesome/free-solid-svg-icons';
 import { BlogContext } from '../context/blogcontext';
 
 const categories = [
@@ -34,7 +34,8 @@ const Sidebar = () => {
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <h1>
-            <Link to="/">BlogVerse</Link>
+          
+            <Link to="/"><FontAwesomeIcon icon={faBolt} /> BlogVerse</Link>
           </h1>
           <button className="toggle-btn" onClick={toggleSidebar}>
             <FontAwesomeIcon icon={faBars} />
