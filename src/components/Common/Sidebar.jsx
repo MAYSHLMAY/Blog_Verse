@@ -1,4 +1,3 @@
-// Sidebar.jsx
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -29,10 +28,10 @@ const Sidebar = () => {
   };
 
   const filteredBlogs = selectedCategory
-    ? blogs.filter((blog) => blog.category.name === selectedCategory.name)
+    ? blogs.filter((blog) => blog.category && blog.category.name === selectedCategory.name)
     : blogs;
 
-    console.log(filteredBlogs)
+  console.log(filteredBlogs);
 
   return (
     <div>
@@ -46,15 +45,15 @@ const Sidebar = () => {
           </button>
         </div>
         {categories.map((category) => (
-          <a
+          <Link
             key={category.id}
-            href="#"
+            to="/"
             onClick={() => handleCategoryClick(category)}
-            className={selectedCategory === category ? 'active' : ''}
+            className={selectedCategory?.name === category.name ? 'active' : ''}
           >
             <FontAwesomeIcon icon={category.icon} />
             <span>{category.name}</span>
-          </a>
+          </Link>
         ))}
       </div>
     </div>
