@@ -48,7 +48,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
 
   const handleDelete = () => {
     let currId = blog.id;
-    let blogData = JSON.parse(localStorage.getItem("blogs"));
+    let blogData = JSON.parse(localStorage.getItem("blogs")).reverse();
     let editedPostIndex = blogData.findIndex((blog) => blog.id === currId);
     if (editedPostIndex !== -1) {
       blogData.splice(editedPostIndex, 1);
@@ -58,18 +58,19 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   };
 
   return (
-    
+ 
     <div className="blog-post">
-      <div className="blog-header">
-        <h3><img src='../profile.png' width= '40px' alt="Profile" /> {blog.author}</h3>
-        <div>
-          {currentUser === blog.author && (
+      <div className="user">
+        <img src='../profile.png' width= '40px' height= '40px'alt="Profile" /> 
+        <div className="user__info">
+            <h5>{blog.author}</h5>
+        </div>
+        {currentUser === blog.author && (
             <div className="btn_container">
               <button onClick={handleEdit}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faEdit} /></button>
               <button onClick={handleDelete}><FontAwesomeIcon style={{ fontSize: '25px' }} icon={faTrash} /></button>
             </div>
           )}
-        </div>
       </div>
 
       {isEditing ? (
@@ -98,12 +99,13 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
       ) : (
         <>
         <div className="titles">
-          <h2>{blog.title}</h2>
-          <h5>{blog.category.name}</h5>
+        <div class="card__body"> 
+    <span class="tag tag-red">{blog.category.name}</span> 
+    <h4>{blog.title}</h4> 
+    <p>{blog.content}</p> 
+  </div> 
         </div>
-          
-          <hr />
-          <p className="contentt">{blog.content}</p>
+
         </>
       )}
 
