@@ -40,12 +40,12 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
-        <div>
-        <FontAwesomeIcon icon={faHome} />
-        <button  onClick={() => handleHome()}>Home</button>
+        <div className="homee">
+        <FontAwesomeIcon icon={faHome} /> 
+        <span onClick={() => handleHome()}> Home</span>
         </div>
       
-          <p>Discover categories</p>
+          <p className='catee'>Discover categories</p>
         {categories.map((category) => (
           <Link
             key={category.id}
