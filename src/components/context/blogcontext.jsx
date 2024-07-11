@@ -8,6 +8,7 @@ const BlogProvider = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
+    setBlogs(blogs)
     localStorage.setItem('blogs', JSON.stringify(blogs));
   }, [blogs]);
 

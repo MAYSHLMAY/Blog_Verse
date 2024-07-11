@@ -35,7 +35,7 @@ const Home = () => {
           ? {
               ...blog,
               likes: blog.likes + 1,
-              likedBy: blog.likedBy ? [...blog.likedBy, currentUser].reverse() : [currentUser],
+              likedBy: blog.likedBy ? [...blog.likedBy, currentUser] : [currentUser],
             }
           : blog
       );

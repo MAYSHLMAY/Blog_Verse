@@ -3,10 +3,12 @@ import { getCurrentUser } from "../../utils/authentic";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faThumbsUp, faCommentDots, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { BlogContext } from "../context/blogcontext";
 
 let currentUser = getCurrentUser() ? getCurrentUser().username : null;
 
 const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
+
   const [comment, setComment] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(blog.title);
@@ -56,6 +58,7 @@ const BlogPost = ({ blog, likePost, addComment, updateBlog, deleteBlog }) => {
   };
 
   return (
+    
     <div className="blog-post">
       <div className="blog-header">
         <h3><img src='../profile.png' width= '40px' alt="Profile" /> {blog.author}</h3>
