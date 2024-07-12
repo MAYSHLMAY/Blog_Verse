@@ -90,15 +90,15 @@ search-bar {
   margin: 0.5rem 0;
 }
 .navbar {
-  color: white;
-  padding: 1.5rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background: #636a71;
+    color: white;
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #00000073;
 }
 
 .blog-header{
@@ -115,7 +115,7 @@ search-bar {
 
 .nav-links {
   position: absolute;
-  right: 0.75em;
+  right: 1em;
   top: 1em;
 }
 
@@ -272,7 +272,7 @@ search-bar {
   display: flex;
   justify-content: center;
   margin-bottom: 2em;
-  background: #0000008a;
+  background: #00000073;
   color: #fff;
   position: sticky;
   top: 3em;
@@ -380,7 +380,7 @@ search-bar {
   margin-left: 70px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
   .sidebar {
     width: 0px;
     background-color:  #6D7E8D;
@@ -600,7 +600,7 @@ search-bar {
 
 .splash-buttons {
   display: flex;
-  gap: 9rem;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -753,4 +753,65 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   padding-left: 1em;
     padding-right: 1rem;
     margin: 5em auto;
+}
+
+.auth-form_footer {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-form_footer > * {
+  color: #fff !important
+}
+.auth-container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-card {
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+  width: 400px;
+  height: 400px;
+  background-color: #ffffff;
+  padding: 10px 30px;
+}
+
+.auth-card_title {
+  text-align: center;
+  padding: 10px;
+}
+
+.auth-card_title h1 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.auth-form input {
+  margin: 10px 0;
+    width: 100%;
+    background-color: #e2e2e2;
+    border: none;
+    outline: none;
+    padding: 12px 5px 12px 2px;
+    border-radius: 4px;
+}
+
+.auth-form button {
+  background-color: #4796ff;
+  color: #ffffff;
+  font-size: 16px;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 15px;
+  width: 100%;
+}
+
+
+.auth-card a {
+  color: #4796ff;
+  text-decoration: none;
 }

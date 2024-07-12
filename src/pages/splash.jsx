@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { faBolt } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fab);
 
@@ -20,7 +21,7 @@ const handleLogin = () => {
 };
     return (
       <div className="splash-container">
-        <div className="splash-logo">Blog BLAST</div>
+        <div className="splash-logo"><FontAwesomeIcon icon={faBolt} /> Blog BLAST</div>
         <div className="splash-buttons">
         <button onClick={handleGetStarted}>Get Started</button>
         <button onClick={handleLogin}>LOGIN</button>

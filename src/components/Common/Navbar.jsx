@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getCurrentUser, logout } from '../../utils/authentic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 const currentUser = getCurrentUser();
 console.log(currentUser)
@@ -24,7 +24,7 @@ const Navbar = () => {
             </Link>
             <Link to="/">{currentUser.username}</Link>
             <Link to="/splash" onClick={logout}>
-              Logout
+            <FontAwesomeIcon icon={faSignOutAlt} />
             </Link>
           </>
         ) : (
